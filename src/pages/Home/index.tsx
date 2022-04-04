@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-// import { NoteCard } from '../../components/MovieCard';
+import React, { useEffect, useState } from 'react';
+import NoteCard from '../../components/MovieCard';
 import { useNavigate } from 'react-router-dom';
-// import { Loading } from '../../components/Loading';
+import Loading from '../../components/Loading';
 import { useTheme } from 'styled-components';
-import * as api from '../../services/api';
+import { useAuth } from '../../hooks/useAuth';
+import { useNotes } from '../../hooks/useNotes';
 import {
     Container,
     Content,
@@ -12,31 +13,38 @@ import {
 
 
 const Home: React.FC = () => {
+    const { user } = useAuth();
+    const { notes, fetchNotes } = useNotes();
     const theme = useTheme();
-    const [notes, setNotes] = useState<Note[]>([] as Note[]);
-    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    async function fetchNotes() {
-        try {
-            setLoading(true);
-            // const response = await api.searchMovies(search);
-            // setNotes(response);
-        } catch (err) {
-            return console.log(err);
-        } finally {
-            setLoading(false);
-        };
-    };
-    function handleSelectedNote(note: Note) {
+    const [loading, setLoading] = useState(false);
+    const handleSelectedNote = (note: Note) => {
         navigate(`/${String(note.id)}`);
     };
+    const getNotes = async () => {
+        setLoading(true);
+        try {
+            await fetchNotes();
+        } catch (error: any) {
+            console.log(error.message as string);
+        }
+        finally {
+            setLoading(false);
+        }
+    }
+    useEffect(() => {
+        // if (user === null) {
+        //     return navigate("/");
+        // };
+        getNotes();
+    }, [user, notes])
     return (
         <Container>
             <ContentContainer>
-                <h1>ola</h1>
-                {/* {loading ? <Loading /> :
+                <h1>{user?.name || "ola"}</h1>
+                {loading ? <Loading /> :
                     <Content>
-                        {notes.map((note: Note) => (
+                        {notes?.map((note: Note) => (
                             <NoteCard
                                 data={note}
                                 key={note.id}
@@ -44,7 +52,7 @@ const Home: React.FC = () => {
                             />
                         ))}
                     </Content>
-                } */}
+                }
             </ContentContainer>
         </Container>
     );

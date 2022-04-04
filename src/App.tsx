@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { GlobalStyle } from './styles/global';
 import theme from './styles/theme';
 import { AuthProvider } from './hooks/useAuth';
+import { NotesProvider } from './hooks/useNotes';
 
 
 const App = () => {
@@ -12,9 +13,11 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <AuthProvider>
-        <Router>
-          <Rotas />
-        </Router>
+        <NotesProvider>
+          <Router>
+            <Rotas />
+          </Router>
+        </NotesProvider>
       </AuthProvider>
     </ThemeProvider>
   );

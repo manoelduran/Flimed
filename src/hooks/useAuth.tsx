@@ -30,10 +30,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     };
   };
   useEffect(() => {
-    const inspect = () => {
-      loadUser();
-    }
-    return inspect;
+    loadUser();
   }, [user]);
   return (
     <AuthContext.Provider value={{ user, fetchUser }}>

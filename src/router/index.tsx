@@ -5,17 +5,11 @@ import Login from '../pages/Login'
 import { useAuth } from "../hooks/useAuth";
 
 const Rotas = () => {
-  const { user } = useAuth();
   return (
-    <Routes>
-      {user?.id ?
-        <>
-          <Route path="/home" element={<Home />} />
-          <Route path="/home/:title" element={<Note />} />
-        </>
-        :
-        <Route path="/" element={<Login />} />
-      }
+    <Routes >
+      <Route path="/" element={<Login />} />
+      < Route path="/home" element={< Home />} />
+      < Route path="/home/:title" element={< Note />} />
     </Routes>
   );
 };

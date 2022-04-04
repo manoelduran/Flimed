@@ -26,7 +26,7 @@ const Login: React.FC = () => {
             // navigate('Dashboard');
         } catch (error: any) {
             if (error) {
-                alert(error.message as string);
+                console.log(error.message as string)
             }
         } finally {
             setLoading(false);
