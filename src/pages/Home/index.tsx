@@ -28,7 +28,7 @@ const Home: React.FC = () => {
         };
     };
     function handleSelectedNote(note: Note) {
-        navigate(`/${String(note.title)}`);
+        navigate(`/${String(note.id)}`);
     };
     return (
         <Container>
@@ -36,10 +36,10 @@ const Home: React.FC = () => {
                 <h1>ola</h1>
                 {/* {loading ? <Loading /> :
                     <Content>
-                        {notes.map((note: Note, key) => (
+                        {notes.map((note: Note) => (
                             <NoteCard
                                 data={note}
-                                key={key}
+                                key={note.id}
                                 onClick={() => handleSelectedNote(note)}
                             />
                         ))}

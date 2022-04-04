@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   };
 
   body {
-    background: ${({ theme }) => theme.black};
+    background: ${({ theme }) => theme.background};
     color: ${({ theme }) => theme.white_details};
   };
 

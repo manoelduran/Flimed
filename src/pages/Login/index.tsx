@@ -14,7 +14,7 @@ import {
 const Login: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     async function onSubmit(event: FormEvent) {
         event.preventDefault();
         setLoading(true);
@@ -24,8 +24,10 @@ const Login: React.FC = () => {
             //     throw new Error("Usuário não encontrado");
             // };
             // navigate('Dashboard');
-        } catch (err: any) {
-            //     alert(err.message);
+        } catch (error: any) {
+            if (error) {
+                alert(error.message as string);
+            }
         } finally {
             setLoading(false);
         }
@@ -37,13 +39,13 @@ const Login: React.FC = () => {
             <Form onSubmit={onSubmit}>
                 <EmailInput
                     type='email'
-                    placeholder="Digite seu Email"
+                    placeholder="Email"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
                 />
                 <PasswordInput
                     type='password'
-                    placeholder="Digite sua Senha"
+                    placeholder="Password"
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
                 />
@@ -52,7 +54,7 @@ const Login: React.FC = () => {
                         ?
                         <Loading />
                         :
-                        "Acessar o Sistema"
+                        "Join"
                     }
                 </FormButton>
             </Form>
