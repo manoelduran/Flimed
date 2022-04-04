@@ -1,11 +1,14 @@
+import React from 'react';
+import {TailSpin} from "react-loader-spinner";
+import { useTheme } from "styled-components";
 import {
-  Container,
-  Text
+  Container
 } from "./styles";
 const Loading: React.FC = () => {
+  const theme = useTheme();
   return (
     <Container>
-      <Text>Loading...</Text>
+      <TailSpin color={theme.white_details} height={30} width={30} />
     </Container>
   );
 };

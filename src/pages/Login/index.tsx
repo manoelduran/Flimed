@@ -1,5 +1,6 @@
-import React, { FormEvent, Suspense, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import Loading from '../../components/Loading';
+import LogoSvg from '../../assets/logo.svg';
 import {
     Container,
     Logo,
@@ -13,7 +14,7 @@ import {
 const Login: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     async function onSubmit(event: FormEvent) {
         event.preventDefault();
         setLoading(true);
@@ -31,8 +32,8 @@ const Login: React.FC = () => {
     };
     return (
         <Container>
-            <Logo src="/logo.svg" alt="Logo" />
-            <Title >Fazer login no TrackCash:</Title>
+            <Logo src={LogoSvg} alt="Flimed" />
+            <Title >Let's enjoy Flimed</Title>
             <Form onSubmit={onSubmit}>
                 <EmailInput
                     type='email'
@@ -46,11 +47,14 @@ const Login: React.FC = () => {
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
                 />
-                {loading
-                    ?
-                    <Loading />
-                    :
-                    <FormButton type="submit">Acessar o Sistema</FormButton>}
+                <FormButton type="submit">
+                    {loading
+                        ?
+                        <Loading />
+                        :
+                        "Acessar o Sistema"
+                    }
+                </FormButton>
             </Form>
         </Container>
     );

@@ -1,14 +1,20 @@
 import styled from 'styled-components';
 import {darken} from 'polished';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+width: 100% ;
+height: 100% ;
+display: flex ;
+flex-direction: column ;
+align-items: center ;
+justify-content: center ;
+`;
 
 export const Logo = styled.img`
 position: static;
 width: 144px;
 height: 144px;
-left: 79px;
-top: 0px;
+
 `;
 export const Title = styled.h1`
 margin-top: 30px;
