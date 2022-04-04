@@ -41,8 +41,10 @@ const Home: React.FC = () => {
     return (
         <Container>
             <ContentContainer>
-                <h1>{user?.name || "ola"}</h1>
-                {loading ? <Loading /> :
+                <NoteCard
+                
+                />
+                {/* {loading ? <Loading /> :
                     <Content>
                         {notes?.map((note: Note) => (
                             <NoteCard
@@ -52,7 +54,7 @@ const Home: React.FC = () => {
                             />
                         ))}
                     </Content>
-                }
+                } */}
             </ContentContainer>
         </Container>
     );

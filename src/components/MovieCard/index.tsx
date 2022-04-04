@@ -2,10 +2,10 @@ import React from 'react';
 import {
   Container,
   Title,
-  ButtonCard,
   Details,
   Description,
-  DescriptionContainer,
+  DeleteButton,
+  UpdateButton,
 } from './styles';
 
 interface NoteCardProps {
@@ -13,17 +13,15 @@ interface NoteCardProps {
   onClick: () => void;
 };
 
-const MovieCard = ({ data, onClick }: NoteCardProps) => {
+const MovieCard = () => {
   return (
-    <Container >
-      <ButtonCard onClick={onClick}>
-        <Details>
-          <DescriptionContainer>
-            <Description>{data.description} </Description>
-          </DescriptionContainer>
-          <Title>{data.title}</Title>
-        </Details>
-      </ButtonCard>
+    <Container>
+      <Details>
+        <Title>Mercado</Title>
+        <Description> Lista de Compras:</Description>
+        <DeleteButton>Delete</DeleteButton>
+        <UpdateButton>Update</UpdateButton>
+      </Details>
     </Container>
   );
 };
