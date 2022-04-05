@@ -39,7 +39,7 @@ const Home: React.FC = () => {
             return navigate("/");
         };
         getNotes();
-    }, [user, notes])
+    }, [user])
     return (
         <Container>
             <Title>TODO APP</Title>
@@ -50,9 +50,10 @@ const Home: React.FC = () => {
                     {loading ? <Loading />
                         :
                         <Content>
-                            {notes?.map((note: Note) => (
+                            {notes?.map((note: Note, key) => (
                                 <NoteCard
                                     data={note}
+                                    key={key}
                                     onClick={() => handleSelectedNote(note)}
                                 />
                             ))}

@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import Loading from '../../components/Loading';
 import LogoSvg from '../../assets/logo.svg';
 import {
@@ -13,8 +13,9 @@ import {
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 
+
 const Login: React.FC = () => {
-    const { fetchUser } = useAuth();
+    const { fetchUser, user } = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -26,13 +27,16 @@ const Login: React.FC = () => {
             await fetchUser(email, password);
             navigate('home');
         } catch (error: any) {
-            if (error) {
-                console.log(error.message as string)
-            }
+            console.log(error.message as string);
         } finally {
             setLoading(false);
         }
     };
+    useEffect(() => {
+        if (user) {
+            navigate("home");
+        }
+    }, [])
     return (
         <Container>
             <Logo src={LogoSvg} alt="Flimed" />

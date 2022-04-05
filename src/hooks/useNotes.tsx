@@ -10,7 +10,6 @@ interface NotesContextData {
     fetchNotes: () => Promise<void>;
     handleOpenModal: (id?: string) => void;
     handleCloseModal: () => void;
-    createNote: (title: string, description: string, content: string) => Promise<void>;
     updateNote: (data: Note) => Promise<void>;
     deleteNote: (data: Note) => Promise<void>;
 }
@@ -26,9 +25,6 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
             const parsedNotes = await JSON.parse(notesCollection) as Note[];
             setNotes(parsedNotes);
         };
-    };
-    const createNote = async (title: string, description: string, content: string) => {
-
     };
     const updateNote = async (data: Note) => {
         handleOpenModal(String(data.id));
@@ -49,7 +45,6 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
         <NotesContext.Provider value={{
             notes,
             fetchNotes,
-            createNote,
             deleteNote,
             updateNote,
             handleCloseModal,

@@ -19,9 +19,6 @@ interface NoteCardProps {
 
 const NoteCard = ({ data, onClick }: NoteCardProps) => {
   const { deleteNote, updateNote, isModalVisible } = useNotes();
-  useEffect(() => {
-    console.log(data)
-  }, [data])
   return (
     <Container>
       {isModalVisible ? <Modal data={data}/>

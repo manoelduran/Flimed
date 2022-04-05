@@ -37,7 +37,7 @@ const Modal = ({ data }: ModalProps) => {
     };
     useEffect(() => {
         console.log(data?.id)
-    }, [data])
+    }, [])
     return (
         <Container>
             <Header>
