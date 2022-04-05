@@ -19,7 +19,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     const currentUser = await api.login(email, password);
     if (currentUser) {
       localStorage.setItem('user', JSON.stringify(currentUser));
-      setUser(currentUser);
+      setUser(currentUser.user as User);
     };
   };
   const loadUser = async () => {
@@ -30,7 +30,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     };
   };
   useEffect(() => {
-    loadUser();
+    if (user === null) {
+      loadUser();
+    }
+    console.log(user);
   }, [user]);
   return (
     <AuthContext.Provider value={{ user, fetchUser }}>

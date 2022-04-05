@@ -11,43 +11,20 @@ import {
     CreateButton,
     ContentContainer
 } from './styles';
-import { Modal } from '../../components/Modal';
+import Modal from '../../components/Modal';
 
 
 const Home: React.FC = () => {
     const { user } = useAuth();
     const { fetchNotes, isModalVisible, handleOpenModal } = useNotes();
+
     const notes: Note[] = [
         {
             id: String(new Date()),
             title: "Mercado",
             description: "Lista de Compras",
             content: "1. Ovo 2. Leite 3. Pão 4. Queijo 5. Presunto"
-        }, 
-        {
-            id: String(new Date()),
-            title: "Mercado",
-            description: "Lista de Compras",
-            content: "1. Ovo 2. Leite 3. Pão 4. Queijo 5. Presunto"
-        }, 
-        {
-            id: String(new Date()),
-            title: "Mercado",
-            description: "Lista de Compras",
-            content: "1. Ovo  2. Leite 3. Pão 4. Queijo 5. Presunto"
-        }, 
-        {
-            id: String(new Date()),
-            title: "Mercado",
-            description: "Lista de Compras",
-            content: "1. Ovo 2. Leite 3. Pão 4. Queijo 5. Presunto"
-        }, 
-        {
-            id: String(new Date()),
-            title: "Mercado",
-            description: "Lista de Compras",
-            content: "1. Ovo 2. Leite 3. Pão 4. Queijo 5. Presunto"
-        }, 
+        },
     ]
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -66,15 +43,15 @@ const Home: React.FC = () => {
         }
     }
     useEffect(() => {
-        // if (user === null) {
-        //     return navigate("/");
-        // };
+        if (user === null) {
+            return navigate("/");
+        };
         getNotes();
-    }, [ user])
+    }, [user])
     return (
         <Container>
             <Title>TODO APP</Title>
-            <CreateButton onClick={handleOpenModal}>Create new task </CreateButton>
+            <CreateButton onClick={() => handleOpenModal()}>Create new task </CreateButton>
             {isModalVisible ? <Modal />
                 :
                 <ContentContainer>

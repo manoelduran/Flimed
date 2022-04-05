@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNotes } from '../../hooks/useNotes';
+import Modal from '../Modal';
 import {
   Container,
   Title,
@@ -16,21 +18,34 @@ interface NoteCardProps {
 };
 
 const MovieCard = ({ data, onClick }: NoteCardProps) => {
+  const { deleteNote, updateNote, isModalVisible } = useNotes();
+  useEffect(() => {
+    console.log(data)
+  }, [data])
   return (
     <Container>
-      <Details onClick={onClick}>
-        <Title>{data.title}</Title>
-        <Description> {data.description}</Description>
-        <Content
-          disabled
-        >
-          {data.content}
-        </Content>
-      </Details>
-      <ButtonsContainer>
-        <DeleteButton>Delete</DeleteButton>
-        <UpdateButton>Update</UpdateButton>
-      </ButtonsContainer>
+      {isModalVisible ? <Modal data={data}/>
+        :
+     <>
+     <Details onClick={onClick}>
+     <Title>{data.title}</Title>
+     <Description> {data.description}</Description>
+     <Content
+     defaultValue={data.content}
+       disabled
+     >
+  
+     </Content>
+   </Details>
+   <ButtonsContainer>
+     <DeleteButton
+       onClick={() => deleteNote(data)}
+     >Delete</DeleteButton>
+     <UpdateButton
+       onClick={() => updateNote(data)}
+     >Update</UpdateButton>
+   </ButtonsContainer></>
+      }
     </Container>
   );
 };

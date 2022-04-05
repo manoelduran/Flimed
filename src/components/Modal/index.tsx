@@ -15,8 +15,10 @@ import {
     FormButton,
     TitleInput
 } from './styles';
-
-export function Modal() {
+interface ModalProps{
+   data?: Note;
+}
+const Modal = ({data}: ModalProps) => {
     const { handleCloseModal } = useNotes();
     const [loading, setLoading] = useState(false);
     const [title, setTitle] = useState('');
@@ -39,11 +41,14 @@ export function Modal() {
             setLoading(false);
         }
     };
+    useEffect(() => {
+        console.log(data?.id)
+      },[data])
     return (
         <Container>
             <Header>
                 <div />
-                <Title>Add </Title>
+                <Title>{data?.id ? "Edit Task" : "Add Task"}</Title>
                 <Button onClick={handleCloseModal} >
                     <AiOutlineClose style={{ color: theme.white_details }} />
                 </Button>
@@ -77,4 +82,6 @@ export function Modal() {
             </Form>
         </Container>
     );
-}
+};
+
+export default Modal;

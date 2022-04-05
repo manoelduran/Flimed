@@ -6,9 +6,11 @@ import {
 } from './styles';
 import { useTheme } from 'styled-components';
 import Loading from '../../components/Loading';
+import { useAuth } from '../../hooks/useAuth';
 
 const Note: React.FC = () => {
-    const { title } = useParams() as unknown as NoteParams;
+    const { user } = useAuth();
+    const { id } = useParams() as unknown as NoteParams;
     const [note, setNote] = useState<Note>({} as Note);
     const [loading, setLoading] = useState(false);
     const theme = useTheme();
@@ -28,9 +30,10 @@ const Note: React.FC = () => {
         navigate(-1)
     }
     useEffect(() => {
-        // fetchNote(id);
-
-    }, [title])
+        if (user === null) {
+            return navigate("/");
+        };
+    }, [user])
     return (
         <Container>
             {loading ?

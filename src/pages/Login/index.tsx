@@ -10,20 +10,21 @@ import {
     PasswordInput,
     FormButton
 } from './styles';
+import { useAuth } from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
+    const { fetchUser } = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     async function onSubmit(event: FormEvent) {
         event.preventDefault();
         setLoading(true);
         try {
-            // const user = await fetchCurrentUser(username, password);
-            // if (!user) {
-            //     throw new Error("Usuário não encontrado");
-            // };
-            // navigate('Dashboard');
+            await fetchUser(email, password);
+            navigate('home');
         } catch (error: any) {
             if (error) {
                 console.log(error.message as string)

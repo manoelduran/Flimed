@@ -6,7 +6,7 @@ interface Note {
 };
 
 interface NoteParams {
-    title: string;
+    id: string;
 };
 interface User {
     id: string;
