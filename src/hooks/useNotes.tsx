@@ -1,5 +1,4 @@
 import React, { ReactNode, useState, useEffect, useContext } from "react";
-import { useAuth } from "./useAuth";
 
 interface NotesProviderProps {
     children: ReactNode;
@@ -7,14 +6,17 @@ interface NotesProviderProps {
 
 interface NotesContextData {
     notes: Note[] | null;
+    isModalVisible: boolean;
     fetchNotes: () => Promise<void>;
+    handleOpenModal: () => void;
+    handleCloseModal: () => void;
 }
 
 export const NotesContext = React.createContext<NotesContextData>({} as NotesContextData);
 
 const NotesProvider = ({ children }: NotesProviderProps) => {
-    const { user } = useAuth();
     const [notes, setNotes] = useState<Note[]>(JSON.parse(localStorage.getItem('notes')!) ?? null);
+    const [isModalVisible, setIsModalVisible] = useState(false);
     const fetchNotes = async () => {
         const notesCollection = await localStorage.getItem('notes');
         if (notesCollection) {
@@ -22,8 +24,15 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
             setNotes(parsedNotes);
         };
     };
+    function handleOpenModal() {
+        setIsModalVisible(true);
+    };
+
+    function handleCloseModal() {
+        setIsModalVisible(false);
+    };
     return (
-        <NotesContext.Provider value={{ notes, fetchNotes }}>
+        <NotesContext.Provider value={{ notes, fetchNotes, handleCloseModal, handleOpenModal, isModalVisible }}>
             {children}
         </NotesContext.Provider>
     );

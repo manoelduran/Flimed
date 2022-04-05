@@ -7,14 +7,17 @@ import { useAuth } from '../../hooks/useAuth';
 import { useNotes } from '../../hooks/useNotes';
 import {
     Container,
+    Title,
     Content,
+    CreateButton,
     ContentContainer
 } from './styles';
+import { Modal } from '../../components/Modal';
 
 
 const Home: React.FC = () => {
     const { user } = useAuth();
-    const { notes, fetchNotes } = useNotes();
+    const { notes, fetchNotes, isModalVisible, handleOpenModal } = useNotes();
     const theme = useTheme();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -40,10 +43,25 @@ const Home: React.FC = () => {
     }, [user, notes])
     return (
         <Container>
-            <ContentContainer>
+            <Title>TODO APP</Title>
+            <CreateButton onClick={handleOpenModal}>Create new task </CreateButton>
+            {isModalVisible ? <Modal /> : <ContentContainer>
                 <NoteCard
-                
+
                 />
+                <NoteCard
+
+                />
+                <NoteCard
+
+                />
+                <NoteCard
+
+                />
+                <NoteCard
+
+                />
+
                 {/* {loading ? <Loading /> :
                     <Content>
                         {notes?.map((note: Note) => (
@@ -55,7 +73,7 @@ const Home: React.FC = () => {
                         ))}
                     </Content>
                 } */}
-            </ContentContainer>
+            </ContentContainer>}
         </Container>
     );
 };

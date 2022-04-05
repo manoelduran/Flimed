@@ -4,6 +4,8 @@ import {
   Title,
   Details,
   Description,
+  Content,
+  ButtonsContainer,
   DeleteButton,
   UpdateButton,
 } from './styles';
@@ -19,8 +21,17 @@ const MovieCard = () => {
       <Details>
         <Title>Mercado</Title>
         <Description> Lista de Compras:</Description>
-        <DeleteButton>Delete</DeleteButton>
-        <UpdateButton>Update</UpdateButton>
+        <Content>
+          1. Ovo <br />
+          2. Leite  <br />
+          3. Pão <br />
+          4. Queijo <br />
+          5. Presunto<br />
+        </Content>
+        <ButtonsContainer>
+          <DeleteButton>Delete</DeleteButton>
+          <UpdateButton>Update</UpdateButton>
+        </ButtonsContainer>
       </Details>
     </Container>
   );
