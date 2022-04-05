@@ -19,24 +19,21 @@ interface ModalProps {
     data?: Note;
 }
 const Modal = ({ data }: ModalProps) => {
-    const { handleCloseModal, createNote } = useNotes();
+    const { handleCloseModal, notes } = useNotes();
     const [loading, setLoading] = useState(false);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [content, setContent] = useState('');
     async function onSubmit(event: FormEvent) {
         event.preventDefault();
-        setLoading(true);
-        try {
-            await createNote(title, description, content);
+            notes.push({
+                id: String(new Date()),
+                title,
+                description,
+                content,
+            });
+            localStorage.setItem('notes', JSON.stringify(notes));
             handleCloseModal();
-        } catch (error: any) {
-            if (error) {
-                console.log(error.message as string)
-            }
-        } finally {
-            setLoading(false);
-        }
     };
     useEffect(() => {
         console.log(data?.id)
@@ -50,7 +47,7 @@ const Modal = ({ data }: ModalProps) => {
                     <AiOutlineClose style={{ color: theme.white_details }} />
                 </Button>
             </Header>
-            <Form onSubmit={onSubmit}>
+            <Form>
                 <TitleInput
                     type='text'
                     placeholder="Title"
@@ -68,7 +65,7 @@ const Modal = ({ data }: ModalProps) => {
                     value={content}
                     onChange={(event) => setContent(event.target.value)}
                 />
-                <FormButton type="submit">
+                <FormButton type="submit" onClick={onSubmit}>
                     {loading
                         ?
                         <Loading />

@@ -17,7 +17,7 @@ interface NoteCardProps {
   onClick: () => void;
 };
 
-const MovieCard = ({ data, onClick }: NoteCardProps) => {
+const NoteCard = ({ data, onClick }: NoteCardProps) => {
   const { deleteNote, updateNote, isModalVisible } = useNotes();
   useEffect(() => {
     console.log(data)
@@ -50,4 +50,4 @@ const MovieCard = ({ data, onClick }: NoteCardProps) => {
   );
 };
 
-export default MovieCard;
+export default NoteCard;

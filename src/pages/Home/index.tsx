@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import NoteCard from '../../components/MovieCard';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading';
+import Modal from '../../components/Modal';
+import NoteCard from '../../components/NoteCard';
 import { useAuth } from '../../hooks/useAuth';
 import { useNotes } from '../../hooks/useNotes';
 import {
@@ -11,7 +12,7 @@ import {
     CreateButton,
     ContentContainer
 } from './styles';
-import Modal from '../../components/Modal';
+
 
 
 const Home: React.FC = () => {
@@ -38,7 +39,7 @@ const Home: React.FC = () => {
             return navigate("/");
         };
         getNotes();
-    }, [user])
+    }, [user, notes])
     return (
         <Container>
             <Title>TODO APP</Title>
@@ -49,10 +50,9 @@ const Home: React.FC = () => {
                     {loading ? <Loading />
                         :
                         <Content>
-                            {notes?.map((note: Note, key) => (
+                            {notes?.map((note: Note) => (
                                 <NoteCard
                                     data={note}
-                                    key={key}
                                     onClick={() => handleSelectedNote(note)}
                                 />
                             ))}

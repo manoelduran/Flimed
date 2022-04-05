@@ -5,7 +5,7 @@ interface NotesProviderProps {
 };
 
 interface NotesContextData {
-    notes: Note[] | null;
+    notes: Note[];
     isModalVisible: boolean;
     fetchNotes: () => Promise<void>;
     handleOpenModal: (id?: string) => void;
@@ -18,7 +18,7 @@ interface NotesContextData {
 export const NotesContext = React.createContext<NotesContextData>({} as NotesContextData);
 
 const NotesProvider = ({ children }: NotesProviderProps) => {
-    const [notes, setNotes] = useState<Note[]>(JSON.parse(localStorage.getItem('notes')!) ?? null);
+    const [notes, setNotes] = useState<Note[]>(JSON.parse(localStorage.getItem('notes')!) ?? []);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const fetchNotes = async () => {
         const notesCollection = await localStorage.getItem('notes');
@@ -28,21 +28,15 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
         };
     };
     const createNote = async (title: string, description: string, content: string) => {
-        const currentNote = {
-            id: String(new Date()),
-            title,
-            description,
-            content
-        } as Note;
-        await localStorage.setItem('notes', JSON.stringify(currentNote));
+
     };
     const updateNote = async (data: Note) => {
         handleOpenModal(String(data.id));
     };
     const deleteNote = async (data: Note) => {
-        const filteredNote = notes.filter((note: Note) => note.id !== data.id);
+        const filteredNote = notes?.filter((note: Note) => note.id !== data.id);
         localStorage.setItem('notes', JSON.stringify(filteredNote));
-        setNotes(filteredNote);
+        setNotes(filteredNote as Note[]);
     };
     function handleOpenModal(id?: string) {
         setIsModalVisible(true);
