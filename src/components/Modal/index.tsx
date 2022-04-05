@@ -15,11 +15,11 @@ import {
     FormButton,
     TitleInput
 } from './styles';
-interface ModalProps{
-   data?: Note;
+interface ModalProps {
+    data?: Note;
 }
-const Modal = ({data}: ModalProps) => {
-    const { handleCloseModal } = useNotes();
+const Modal = ({ data }: ModalProps) => {
+    const { handleCloseModal, createNote } = useNotes();
     const [loading, setLoading] = useState(false);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -28,11 +28,8 @@ const Modal = ({data}: ModalProps) => {
         event.preventDefault();
         setLoading(true);
         try {
-            // const user = await fetchCurrentUser(username, password);
-            // if (!user) {
-            //     throw new Error("Usuário não encontrado");
-            // };
-            // navigate('Dashboard');
+            await createNote(title, description, content);
+            handleCloseModal();
         } catch (error: any) {
             if (error) {
                 console.log(error.message as string)
@@ -43,7 +40,7 @@ const Modal = ({data}: ModalProps) => {
     };
     useEffect(() => {
         console.log(data?.id)
-      },[data])
+    }, [data])
     return (
         <Container>
             <Header>
