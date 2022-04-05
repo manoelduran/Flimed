@@ -2,7 +2,9 @@ import { darken } from 'polished';
 import styled from 'styled-components';
 
 export const Container = styled.div`
-padding: 10px 15px ;
+margin-top: 15px ;
+margin-left: 15px ;
+padding: 15px 15px ;
 border-radius: 8px ;
 background: ${({ theme }) => theme.white_background};
 `;
@@ -19,7 +21,7 @@ export const Description = styled.p`
 font-size: 1.2rem;
 color: ${({ theme }) => theme.black};
 `;
-export const Content = styled.p`
+export const Content = styled.textarea`
 margin-top: 10px ;
 font-size: 1.2rem;
 color: ${({ theme }) => theme.black};

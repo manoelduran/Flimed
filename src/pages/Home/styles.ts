@@ -7,9 +7,11 @@ height: 100vh;
 display: flex;
 flex-direction: column ;
 align-items: center;
+justify-content: center ;
 `;
 
 export const Title = styled.h1`
+padding-bottom:  50px;
 align-items: center;
 `;
 export const CreateButton = styled.button`
@@ -32,10 +34,15 @@ transition: 0.5s;
 `;
 export const ContentContainer = styled.div`
 width: 100% ;
-padding: 50px  15px;
+padding: 35px  15px;
 display: flex;
 align-items: center;
 justify-content: space-between;
 `;
 export const Content = styled.div`
+width: 100% ;
+display: flex;
+flex-wrap: wrap ;
+align-items: center ;
+justify-content: flex-start;
  `;

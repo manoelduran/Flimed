@@ -15,24 +15,20 @@ interface NoteCardProps {
   onClick: () => void;
 };
 
-const MovieCard = () => {
+const MovieCard = ({ data, onClick }: NoteCardProps) => {
   return (
     <Container>
-      <Details>
-        <Title>Mercado</Title>
-        <Description> Lista de Compras:</Description>
-        <Content>
-          1. Ovo <br />
-          2. Leite  <br />
-          3. Pão <br />
-          4. Queijo <br />
-          5. Presunto<br />
+      <Details onClick={onClick}>
+        <Title>{data.title}</Title>
+        <Description> {data.description}</Description>
+        <Content  disabled>
+          {data.content}
         </Content>
-        <ButtonsContainer>
+      </Details>
+      <ButtonsContainer>
           <DeleteButton>Delete</DeleteButton>
           <UpdateButton>Update</UpdateButton>
         </ButtonsContainer>
-      </Details>
     </Container>
   );
 };

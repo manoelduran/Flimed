@@ -17,8 +17,39 @@ import { Modal } from '../../components/Modal';
 
 const Home: React.FC = () => {
     const { user } = useAuth();
-    const { notes, fetchNotes, isModalVisible, handleOpenModal } = useNotes();
-    const theme = useTheme();
+    const { fetchNotes, isModalVisible, handleOpenModal } = useNotes();
+    const notes: Note[] = [
+        {
+            id: String(new Date()),
+            title: "Mercado",
+            description: "Lista de Compras",
+            content: "1. Ovo 2. Leite 3. Pão 4. Queijo 5. Presunto"
+        }, 
+        {
+            id: String(new Date()),
+            title: "Mercado",
+            description: "Lista de Compras",
+            content: "1. Ovo 2. Leite 3. Pão 4. Queijo 5. Presunto"
+        }, 
+        {
+            id: String(new Date()),
+            title: "Mercado",
+            description: "Lista de Compras",
+            content: "1. Ovo 2. Leite 3. Pão 4. Queijo 5. Presunto"
+        }, 
+        {
+            id: String(new Date()),
+            title: "Mercado",
+            description: "Lista de Compras",
+            content: "1. Ovo 2. Leite 3. Pão 4. Queijo 5. Presunto"
+        }, 
+        {
+            id: String(new Date()),
+            title: "Mercado",
+            description: "Lista de Compras",
+            content: "1. Ovo 2. Leite 3. Pão 4. Queijo 5. Presunto"
+        }, 
+    ]
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const handleSelectedNote = (note: Note) => {
@@ -40,40 +71,27 @@ const Home: React.FC = () => {
         //     return navigate("/");
         // };
         getNotes();
-    }, [user, notes])
+    }, [ user])
     return (
         <Container>
             <Title>TODO APP</Title>
             <CreateButton onClick={handleOpenModal}>Create new task </CreateButton>
-            {isModalVisible ? <Modal /> : <ContentContainer>
-                <NoteCard
-
-                />
-                <NoteCard
-
-                />
-                <NoteCard
-
-                />
-                <NoteCard
-
-                />
-                <NoteCard
-
-                />
-
-                {/* {loading ? <Loading /> :
-                    <Content>
-                        {notes?.map((note: Note) => (
-                            <NoteCard
-                                data={note}
-                                key={note.id}
-                                onClick={() => handleSelectedNote(note)}
-                            />
-                        ))}
-                    </Content>
-                } */}
-            </ContentContainer>}
+            {isModalVisible ? <Modal />
+                :
+                <ContentContainer>
+                    {loading ? <Loading />
+                        :
+                        <Content>
+                            {notes?.map((note: Note, key) => (
+                                <NoteCard
+                                    data={note}
+                                    key={key}
+                                    onClick={() => handleSelectedNote(note)}
+                                />
+                            ))}
+                        </Content>
+                    }
+                </ContentContainer>}
         </Container>
     );
 };
