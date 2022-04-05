@@ -21,14 +21,16 @@ const MovieCard = ({ data, onClick }: NoteCardProps) => {
       <Details onClick={onClick}>
         <Title>{data.title}</Title>
         <Description> {data.description}</Description>
-        <Content  disabled>
+        <Content
+          disabled
+        >
           {data.content}
         </Content>
       </Details>
       <ButtonsContainer>
-          <DeleteButton>Delete</DeleteButton>
-          <UpdateButton>Update</UpdateButton>
-        </ButtonsContainer>
+        <DeleteButton>Delete</DeleteButton>
+        <UpdateButton>Update</UpdateButton>
+      </ButtonsContainer>
     </Container>
   );
 };

@@ -11,7 +11,7 @@ justify-content: center ;
 `;
 
 export const Title = styled.h1`
-padding-bottom:  50px;
+padding-bottom: 30px;
 align-items: center;
 `;
 export const CreateButton = styled.button`
@@ -19,9 +19,8 @@ margin-right: 30px ;
 align-self: flex-end ;
 border: none;
 outline: none ;
-width: 200px;
+padding: 20px 20px ;
 border-radius: 8px ;
-height: 45px;
 font-size: 16px;
 line-height: 16px;
 background: ${({ theme }) => theme.green};
@@ -37,7 +36,6 @@ width: 100% ;
 padding: 35px  15px;
 display: flex;
 align-items: center;
-justify-content: space-between;
 `;
 export const Content = styled.div`
 width: 100% ;

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import NoteCard from '../../components/MovieCard';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading';
-import { useTheme } from 'styled-components';
 import { useAuth } from '../../hooks/useAuth';
 import { useNotes } from '../../hooks/useNotes';
 import {
@@ -35,7 +34,7 @@ const Home: React.FC = () => {
             id: String(new Date()),
             title: "Mercado",
             description: "Lista de Compras",
-            content: "1. Ovo 2. Leite 3. Pão 4. Queijo 5. Presunto"
+            content: "1. Ovo  2. Leite 3. Pão 4. Queijo 5. Presunto"
         }, 
         {
             id: String(new Date()),

@@ -22,9 +22,13 @@ font-size: 1.2rem;
 color: ${({ theme }) => theme.black};
 `;
 export const Content = styled.textarea`
-margin-top: 10px ;
+padding: 1rem;
 font-size: 1.2rem;
 color: ${({ theme }) => theme.black};
+border: none;
+outline: none;
+resize: none;
+border-radius: 8px ;
 `;
 export const ButtonsContainer = styled.div`
 margin-top: 10px ;
