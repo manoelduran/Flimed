@@ -19,6 +19,7 @@ const Login: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
     async function onSubmit(event: FormEvent) {
         event.preventDefault();
@@ -26,31 +27,39 @@ const Login: React.FC = () => {
         try {
             await fetchUser(email, password);
             navigate('home');
-        } catch (error: any) {
-            console.log(error.message as string);
+        } catch (e: any) {
+            console.log(e.message as string);
+            if(e.message === "Request failed with status code 400"){
+                setError("Invalid User");
+                alert(error);
+            }
+
         } finally {
             setLoading(false);
         }
     };
     useEffect(() => {
         if (user) {
-            navigate("home");
+            navigate("/home");
         }
     }, [])
     return (
         <Container>
             <Logo src={LogoSvg} alt="Flimed" />
             <Title >Let's enjoy Flimed</Title>
+            <Title>{ error ? `Error: ${error }` : null} </Title>
             <Form onSubmit={onSubmit}>
                 <EmailInput
                     type='email'
                     placeholder="Email"
+                    required
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
                 />
                 <PasswordInput
                     type='password'
                     placeholder="Password"
+                    required
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
                 />
