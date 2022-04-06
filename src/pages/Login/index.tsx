@@ -30,16 +30,16 @@ const Login: React.FC = () => {
             console.log(e.message as string);
             if (e.message === "Request failed with status code 400") {
                 alert("Invalid User! \ncheck if the email or password are correctly!");
-            }
+            };
         } finally {
             setLoading(false);
-        }
+        };
     };
     useEffect(() => {
         if (user) {
             navigate("/home");
-        }
-    }, [])
+        };
+    }, [user]);
     return (
         <Container>
             <Logo src={LogoSvg} alt="Flimed" />

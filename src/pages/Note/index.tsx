@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
     Container,
+    ContentContainer,
+    Title,
+    Description,
     Content,
+    BackButton,
+    Username
 } from './styles';
 import { useTheme } from 'styled-components';
 import Loading from '../../components/Loading';
@@ -18,8 +23,8 @@ const Note: React.FC = () => {
     const theme = useTheme();
     const navigate = useNavigate();
     const fetchNote = async () => {
+        setLoading(true);
         try {
-            setLoading(true);
             const findedNote = notes.find((note: Note) => String(note.id) === id);
             setNote(findedNote as Note);
         } catch (err) {
@@ -36,18 +41,22 @@ const Note: React.FC = () => {
             return navigate("/");
         };
         fetchNote();
-        console.log("note",note)
+        console.log("note", note)
     }, [user, id])
     return (
         <Container>
             {loading ?
                 <Loading />
                 :
-                <Content>
-                    <h1>{note.title}</h1>
-                    <h1>{note.description}</h1>
-                    <h1>{note.content}</h1>
-                </Content>
+                <ContentContainer>
+                    <BackButton onClick={handleGoBack}>
+                        Back
+                    </BackButton>
+                    <Username> {user?.name} </Username>
+                    <Title> {note.title} </Title>
+                    <Description> Description: {note.description} </Description>
+                    <Content> Activities:  {note.content} </Content>
+                </ContentContainer>
             }
         </Container>
     );

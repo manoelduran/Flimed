@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react';
-import { useNotes } from '../../hooks/useNotes';
-import Modal from '../Modal';
+import React from 'react';
 import {
   Container,
   Title,

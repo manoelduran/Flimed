@@ -22,7 +22,6 @@ const Modal = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [content, setContent] = useState("");
-
     const onSubmit = async (event: FormEvent) => {
         event.preventDefault();
         if (title === "" || description === "" || content === "") {
@@ -35,7 +34,7 @@ const Modal = () => {
             description,
             content,
         });
-        localStorage.setItem('notes', JSON.stringify(notes));
+        await localStorage.setItem('notes', JSON.stringify(notes));
         handleCloseModal();
     };
     const update = async (event: FormEvent) => {
@@ -46,13 +45,14 @@ const Modal = () => {
         };
         const updatedNotes = notes.filter((updatedNote: Note) => updatedNote.id !== note.id);
         updatedNotes.push({
-            id: String(new Date()),
+            id: note.id,
             title,
             description,
             content,
         });
-        localStorage.setItem('notes', JSON.stringify(updatedNotes));
+        await localStorage.setItem('notes', JSON.stringify(updatedNotes));
         handleCloseModal();
+        window.location.reload();
     };
     useEffect(() => {
         if (note.id) {

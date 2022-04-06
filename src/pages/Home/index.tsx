@@ -38,7 +38,7 @@ const Home: React.FC = () => {
         if (user === null) {
             return navigate("/");
         };
-        getNotes();
+            getNotes();
     }, [user])
     return (
         <Container>
