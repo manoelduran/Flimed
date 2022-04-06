@@ -10,8 +10,8 @@ interface NotesContextData {
     isModalVisible: boolean;
     fetchNotes: () => Promise<void>;
     handleOpenModal: (data?: Note) => void;
-    handleCloseModal: (data?: Note) => void;
-    updateNote: (data: Note) => Promise<void>;
+    handleCloseModal: () => void;
+    findNote: (data: Note) => Promise<void>;
     deleteNote: (data: Note) => Promise<void>;
 }
 
@@ -28,8 +28,8 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
             setNotes(parsedNotes);
         };
     };
-    const updateNote = async (data: Note) => {
-        const findedNote = notes.find((note: Note) => note.id === data.id)
+    const findNote = async (data: Note) => {
+        const findedNote = notes.find((note: Note) => note.id === data.id);
         console.log("UPDATE NOTE", findedNote);
         handleOpenModal(findedNote as Note);
     };
@@ -58,7 +58,7 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
             note,
             fetchNotes,
             deleteNote,
-            updateNote,
+            findNote,
             handleCloseModal,
             handleOpenModal,
             isModalVisible

@@ -20,7 +20,6 @@ interface NoteCardProps {
 };
 
 const NoteCard = ({ data, onClick, handleEdit, handleDelete }: NoteCardProps) => {
-
   return (
     <Container>
       <Details onClick={() => onClick(data)}>

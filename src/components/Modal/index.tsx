@@ -19,9 +19,9 @@ import {
 const Modal = () => {
     const { handleCloseModal, notes, note } = useNotes();
     const [loading, setLoading] = useState(false);
-    const [title, setTitle] = useState(note ? note.title : "");
-    const [description, setDescription] = useState(note ? note.description : "");
-    const [content, setContent] = useState(note ? note.content : "");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [content, setContent] = useState("");
 
     const onSubmit = async (event: FormEvent) => {
         event.preventDefault();
@@ -36,21 +36,37 @@ const Modal = () => {
             content,
         });
         localStorage.setItem('notes', JSON.stringify(notes));
-        setTitle("");
-        setDescription("");
-        setContent("");
+        handleCloseModal();
+    };
+    const update = async (event: FormEvent) => {
+        event.preventDefault();
+        if (title === "" || description === "" || content === "") {
+            alert("Title , Description and Content are required!");
+            return;
+        };
+        const updatedNotes = notes.filter((updatedNote: Note) => updatedNote.id !== note.id);
+        updatedNotes.push({
+            id: String(new Date()),
+            title,
+            description,
+            content,
+        });
+        localStorage.setItem('notes', JSON.stringify(updatedNotes));
         handleCloseModal();
     };
     useEffect(() => {
-        console.log("DATA MODAL", note)
-        console.log(" NOTE", note);
+        if (note.id) {
+            setTitle(note.title);
+            setDescription(note.description);
+            setContent(note.content);
+        };
     }, [note])
     return (
         <Container>
             <Header>
                 <div />
                 <Title>{note.id ? "Edit Task" : "Add Task"}</Title>
-                <Button onClick={() => handleCloseModal(note)} >
+                <Button onClick={handleCloseModal} >
                     <AiOutlineClose style={{ color: theme.white_details }} />
                 </Button>
             </Header>
@@ -58,21 +74,24 @@ const Modal = () => {
                 <TitleInput
                     type='text'
                     placeholder="Title"
+                    required
                     value={title}
                     onChange={(event) => setTitle(event.target.value)}
                 />
                 <DescriptionInput
                     type='text'
                     placeholder="Description"
+                    required
                     value={description}
                     onChange={(event) => setDescription(event.target.value)}
                 />
                 <ContentTextArea
                     placeholder="Content"
+                    required
                     value={content}
                     onChange={(event) => setContent(event.target.value)}
                 />
-                <FormButton type="submit" onClick={onSubmit}>
+                <FormButton type="submit" onClick={note.id ? update : onSubmit}>
                     {loading
                         ?
                         <Loading />

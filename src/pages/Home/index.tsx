@@ -17,7 +17,7 @@ import {
 
 const Home: React.FC = () => {
     const { user } = useAuth();
-    const { fetchNotes, isModalVisible, handleOpenModal, notes, deleteNote, updateNote } = useNotes();
+    const { fetchNotes, isModalVisible, handleOpenModal, notes, deleteNote, findNote } = useNotes();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const handleSelectedNote = (note: Note) => {
@@ -55,7 +55,7 @@ const Home: React.FC = () => {
                                     data={note}
                                     key={key}
                                     onClick={() => handleSelectedNote(note)}
-                                    handleEdit={() => updateNote(note)}
+                                    handleEdit={() => findNote(note)}
                                     handleDelete={() => deleteNote(note)}
                                 />
                             ))}
