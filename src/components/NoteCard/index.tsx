@@ -14,35 +14,31 @@ import {
 
 interface NoteCardProps {
   data: Note;
-  onClick: () => void;
+  onClick: (data: Note) => void;
+  handleEdit: (data: Note) => void;
+  handleDelete: () => void;
 };
 
-const NoteCard = ({ data, onClick }: NoteCardProps) => {
-  const { deleteNote, updateNote, isModalVisible } = useNotes();
+const NoteCard = ({ data, onClick, handleEdit, handleDelete }: NoteCardProps) => {
+
   return (
     <Container>
-      {isModalVisible ? <Modal data={data}/>
-        :
-     <>
-     <Details onClick={onClick}>
-     <Title>{data.title}</Title>
-     <Description> {data.description}</Description>
-     <Content
-     defaultValue={data.content}
-       disabled
-     >
-  
-     </Content>
-   </Details>
-   <ButtonsContainer>
-     <DeleteButton
-       onClick={() => deleteNote(data)}
-     >Delete</DeleteButton>
-     <UpdateButton
-       onClick={() => updateNote(data)}
-     >Update</UpdateButton>
-   </ButtonsContainer></>
-      }
+      <Details onClick={() => onClick(data)}>
+        <Title>{data.title}</Title>
+        <Description> {data.description}</Description>
+        <Content
+          defaultValue={data.content}
+          disabled
+        />
+      </Details>
+      <ButtonsContainer>
+        <DeleteButton
+          onClick={handleDelete}
+        >Delete</DeleteButton>
+        <UpdateButton
+          onClick={() => handleEdit(data)}
+        >Update</UpdateButton>
+      </ButtonsContainer>
     </Container>
   );
 };

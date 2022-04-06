@@ -17,7 +17,7 @@ import {
 
 const Home: React.FC = () => {
     const { user } = useAuth();
-    const { fetchNotes, isModalVisible, handleOpenModal, notes } = useNotes();
+    const { fetchNotes, isModalVisible, handleOpenModal, notes, deleteNote, updateNote } = useNotes();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const handleSelectedNote = (note: Note) => {
@@ -42,7 +42,7 @@ const Home: React.FC = () => {
     }, [user])
     return (
         <Container>
-            <Title>TODO APP {}</Title>
+            <Title>TODO APP {user?.name}</Title>
             <CreateButton onClick={() => handleOpenModal()}>Create new task </CreateButton>
             {isModalVisible ? <Modal />
                 :
@@ -55,6 +55,8 @@ const Home: React.FC = () => {
                                     data={note}
                                     key={key}
                                     onClick={() => handleSelectedNote(note)}
+                                    handleEdit={() => updateNote(note)}
+                                    handleDelete={() => deleteNote(note)}
                                 />
                             ))}
                         </Content>

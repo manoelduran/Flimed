@@ -15,35 +15,42 @@ import {
     FormButton,
     TitleInput
 } from './styles';
-interface ModalProps {
-    data?: Note;
-}
-const Modal = ({ data }: ModalProps) => {
-    const { handleCloseModal, notes } = useNotes();
+
+const Modal = () => {
+    const { handleCloseModal, notes, note } = useNotes();
     const [loading, setLoading] = useState(false);
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [content, setContent] = useState('');
-    async function onSubmit(event: FormEvent) {
+    const [title, setTitle] = useState(note ? note.title : "");
+    const [description, setDescription] = useState(note ? note.description : "");
+    const [content, setContent] = useState(note ? note.content : "");
+
+    const onSubmit = async (event: FormEvent) => {
         event.preventDefault();
-            notes.push({
-                id: String(new Date()),
-                title,
-                description,
-                content,
-            });
-            localStorage.setItem('notes', JSON.stringify(notes));
-            handleCloseModal();
+        if (title === "" || description === "" || content === "") {
+            alert("Title , Description and Content are required!");
+            return;
+        };
+        notes.push({
+            id: String(new Date()),
+            title,
+            description,
+            content,
+        });
+        localStorage.setItem('notes', JSON.stringify(notes));
+        setTitle("");
+        setDescription("");
+        setContent("");
+        handleCloseModal();
     };
     useEffect(() => {
-        console.log(data?.id)
-    }, [])
+        console.log("DATA MODAL", note)
+        console.log(" NOTE", note);
+    }, [note])
     return (
         <Container>
             <Header>
                 <div />
-                <Title>{data?.id ? "Edit Task" : "Add Task"}</Title>
-                <Button onClick={handleCloseModal} >
+                <Title>{note.id ? "Edit Task" : "Add Task"}</Title>
+                <Button onClick={() => handleCloseModal(note)} >
                     <AiOutlineClose style={{ color: theme.white_details }} />
                 </Button>
             </Header>
@@ -70,7 +77,11 @@ const Modal = ({ data }: ModalProps) => {
                         ?
                         <Loading />
                         :
-                        "Create"
+                        <>
+                            {
+                                note.id ? "Edit" : "Create"
+                            }
+                        </>
                     }
                 </FormButton>
             </Form>
