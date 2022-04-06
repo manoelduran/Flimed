@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useTheme } from 'styled-components';
+import Loading from '../../components/Loading';
+import { useAuth } from '../../hooks/useAuth';
+import { useNotes } from '../../hooks/useNotes';
 import {
     Container,
+    Header,
     ContentContainer,
     Title,
+    Label,
     Description,
     Content,
     BackButton,
     Username
 } from './styles';
-import { useTheme } from 'styled-components';
-import Loading from '../../components/Loading';
-import { useAuth } from '../../hooks/useAuth';
-import { useNotes } from '../../hooks/useNotes';
 
 const Note: React.FC = () => {
     const { user } = useAuth();
@@ -20,7 +22,6 @@ const Note: React.FC = () => {
     const { id } = useParams() as unknown as NoteParams;
     const [note, setNote] = useState<Note>({} as Note);
     const [loading, setLoading] = useState(false);
-    const theme = useTheme();
     const navigate = useNavigate();
     const fetchNote = async () => {
         setLoading(true);
@@ -34,29 +35,36 @@ const Note: React.FC = () => {
         };
     }
     function handleGoBack() {
-        navigate(-1)
-    }
+        navigate(-1);
+    };
     useEffect(() => {
         if (user === null) {
             return navigate("/");
         };
         fetchNote();
         console.log("note", note)
-    }, [user, id])
+    }, [user, id]);
+
     return (
         <Container>
             {loading ?
                 <Loading />
                 :
-                <ContentContainer>
-                    <BackButton onClick={handleGoBack}>
-                        Back
-                    </BackButton>
-                    <Username> {user?.name} </Username>
-                    <Title> {note.title} </Title>
-                    <Description> Description: {note.description} </Description>
-                    <Content> Activities:  {note.content} </Content>
-                </ContentContainer>
+                <>
+                    <Header>
+                        <Username> User: {user?.name} </Username>
+                        <Title> Task: {note.title} </Title>
+                        <BackButton onClick={handleGoBack}>
+                            Go Back
+                        </BackButton>
+                    </Header>
+                    <ContentContainer>
+                        <Label>Description:</Label>
+                        <Description> {note.description} </Description>
+                        <Label>Activites:</Label>
+                        <Content defaultValue={note.content} />
+                    </ContentContainer>
+                </>
             }
         </Container>
     );

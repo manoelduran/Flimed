@@ -2,8 +2,6 @@ import { FormEvent, useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useNotes } from '../../hooks/useNotes';
 import theme from '../../styles/theme';
-import Loading from '../Loading';
-
 import {
     Container,
     Header,
@@ -18,7 +16,6 @@ import {
 
 const Modal = () => {
     const { handleCloseModal, notes, note } = useNotes();
-    const [loading, setLoading] = useState(false);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [content, setContent] = useState("");
@@ -92,15 +89,8 @@ const Modal = () => {
                     onChange={(event) => setContent(event.target.value)}
                 />
                 <FormButton type="submit" onClick={note.id ? update : onSubmit}>
-                    {loading
-                        ?
-                        <Loading />
-                        :
-                        <>
-                            {
-                                note.id ? "Edit" : "Create"
-                            }
-                        </>
+                    {
+                        note.id ? "Edit" : "Create"
                     }
                 </FormButton>
             </Form>

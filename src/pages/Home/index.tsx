@@ -13,8 +13,6 @@ import {
     ContentContainer
 } from './styles';
 
-
-
 const Home: React.FC = () => {
     const { user } = useAuth();
     const { fetchNotes, isModalVisible, handleOpenModal, notes, deleteNote, findNote } = useNotes();
@@ -32,13 +30,13 @@ const Home: React.FC = () => {
         }
         finally {
             setLoading(false);
-        }
-    }
+        };
+    };
     useEffect(() => {
         if (user === null) {
             return navigate("/");
         };
-            getNotes();
+        getNotes();
     }, [user])
     return (
         <Container>

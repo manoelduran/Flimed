@@ -8,7 +8,7 @@ interface AuthProviderProps {
 interface AuthContextData {
   user: User | null;
   fetchUser: (email: string, password: string) => Promise<void>;
-}
+};
 
 export const AuthContext = React.createContext<AuthContextData>({} as AuthContextData);
 
@@ -27,13 +27,13 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     const userCollection = await localStorage.getItem('user');
     if (userCollection) {
       const parsedUser = await JSON.parse(userCollection) as User;
-      fetchUser(parsedUser.email, parsedUser.password)
+      fetchUser(parsedUser.email, parsedUser.password);
     };
   };
   useEffect(() => {
     if (user === null) {
       loadUser();
-    }
+    };
     console.log("AQUI É O  MEU USER", user);
   }, [user]);
   return (

@@ -13,7 +13,6 @@ import {
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 
-
 const Login: React.FC = () => {
     const { fetchUser, user } = useAuth();
     const [email, setEmail] = useState("");

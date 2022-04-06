@@ -1,9 +1,10 @@
 import React from 'react';
-import {TailSpin} from "react-loader-spinner";
+import { TailSpin } from "react-loader-spinner";
 import { useTheme } from "styled-components";
 import {
   Container
 } from "./styles";
+
 const Loading: React.FC = () => {
   const theme = useTheme();
   return (

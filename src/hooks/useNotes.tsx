@@ -38,18 +38,18 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
         localStorage.setItem('notes', JSON.stringify(filteredNote));
         setNotes(filteredNote as Note[]);
     };
-    function handleOpenModal(data?: Note) {
+    const handleOpenModal = (data?: Note) => {
         if (data) {
             console.log("HANDLE OPEN MODAL", data);
             setNote(data);
-        }
+        };
         setIsModalVisible(true);
     };
 
-    function handleCloseModal(data?: Note) {
+    const handleCloseModal = (data?: Note) => {
         if (data) {
             setNote({} as Note);
-        };
+        }
         setIsModalVisible(false);
     };
     return (
