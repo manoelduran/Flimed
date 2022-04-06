@@ -19,21 +19,18 @@ const Login: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
     const navigate = useNavigate();
     async function onSubmit(event: FormEvent) {
         event.preventDefault();
         setLoading(true);
         try {
             await fetchUser(email, password);
-            navigate('home');
+            navigate('/home');
         } catch (e: any) {
             console.log(e.message as string);
-            if(e.message === "Request failed with status code 400"){
-                setError("Invalid User");
-                alert(error);
+            if (e.message === "Request failed with status code 400") {
+                alert("Invalid User! \ncheck if the email or password are correctly!");
             }
-
         } finally {
             setLoading(false);
         }
@@ -47,7 +44,6 @@ const Login: React.FC = () => {
         <Container>
             <Logo src={LogoSvg} alt="Flimed" />
             <Title >Let's enjoy Flimed</Title>
-            <Title>{ error ? `Error: ${error }` : null} </Title>
             <Form onSubmit={onSubmit}>
                 <EmailInput
                     type='email'

@@ -15,13 +15,13 @@ interface User {
     insertedAt: string;
     password: string;
 }
-interface UserRequest {
-    message: string,
-    user: {
-        id: string,
-        name: string,
-        email: string,
-        insertedAt: string
-    },
-    token: string;
-};
+// interface UserRequest {
+//     message: string,
+//     user: {
+//         id: string,
+//         name: string,
+//         email: string,
+//         insertedAt: string
+//     },
+//     token: string;
+// };

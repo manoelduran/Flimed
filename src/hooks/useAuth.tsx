@@ -18,8 +18,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const fetchUser = async (email: string, password: string) => {
     const currentUser = await api.login(email, password);
     if (currentUser) {
+      console.log("AQUI É O DADO DA API", currentUser);
       localStorage.setItem('user', JSON.stringify(currentUser));
-      setUser(currentUser.user as User);
+      setUser(currentUser as User);
     };
   };
   const loadUser = async () => {
@@ -33,7 +34,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     if (user === null) {
       loadUser();
     }
-    console.log(user);
+    console.log("AQUI É O  MEU USER", user);
   }, [user]);
   return (
     <AuthContext.Provider value={{ user, fetchUser }}>

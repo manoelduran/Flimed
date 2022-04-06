@@ -42,7 +42,7 @@ const Home: React.FC = () => {
     }, [user])
     return (
         <Container>
-            <Title>TODO APP</Title>
+            <Title>TODO APP {}</Title>
             <CreateButton onClick={() => handleOpenModal()}>Create new task </CreateButton>
             {isModalVisible ? <Modal />
                 :
